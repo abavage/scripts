@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+from datetime import timedelta
+
 import sys
 filename = sys.argv[1]
 
@@ -41,6 +43,12 @@ seconds_decimal  = s_total
 _pace = minutes_decimal + seconds_decimal 
 pace = round(_pace / line_count,1)
 
+#print(pace)
+
+# convert from time to a string split and slice
+duration = timedelta(seconds=pace)
+average_pace = (str(duration).split('.')[0][3:])
+
 # heart rate
 # gets column 6 in the file
 _heart_rate=[]
@@ -52,7 +60,7 @@ for i in range(0, len(_heart_rate)):
     hr_total = hr_total + int(_heart_rate[i])
 heart_rate_total  = round(hr_total / line_count,1)
 
-print("-------")
-print("Pace:", pace)
-print("HR  :", heart_rate_total)
-print("-------")
+print("-----------")
+print("Pace:", average_pace)
+print("HR:", heart_rate_total)
+print("-----------")
